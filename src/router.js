@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Fitness from './components/Fitness.vue';
-import Form from './components/Form.vue';
 import SessionList from './components/SessionList.vue';
+import EditSession from './components/EditSession.vue';
 import WorkoutList from './components/WorkoutList.vue';
+import NewWorkout from './components/NewWorkout.vue';
+import EditWorkout from './components/EditWorkout.vue';
 
 
 const routes = [
@@ -15,9 +17,21 @@ const routes = [
         redirect: 'session'
       },
       {
+        path: '/session/:id',
+        name: 'editsession',
+        component: EditSession,
+        props: true
+      },
+      {
         path: 'session',
         name: 'session',
         component: SessionList
+      },
+      {
+        path: '/workout/:id',
+        name: 'editworkout',
+        component: EditWorkout,
+        props: true
       },
       {
         path: 'workout',
@@ -25,11 +39,11 @@ const routes = [
         component: WorkoutList
       },
       {
-        path: 'form',
-        name: 'form',
+        path: 'newworkout',
+        name: 'newworkout',
         // This will be handled in Fitness as a modal or subview
         // You may want to use a dedicated form component here
-        component: Form || Fitness
+        component: NewWorkout || Fitness
       },
     ]
   }

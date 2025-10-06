@@ -1,34 +1,35 @@
 <script setup>
-import { defineProps, defineEmits, computed, ref } from "vue";
+import { computed, ref } from "vue";
 import { formatDate, formatDateForComparison } from "../utils/dateFormatter";
+import { useSessionStore } from "../stores/session";
+import { useWorkoutStore } from "../stores/workout";
 
 const props = defineProps({
-  workoutList: {
-    type: Array,
-    required: true,
-  },
-  sessionList: {
-    type: Array,
-    required: true,
-  },
-  onEdit: Function,
-  onAddSession: Function,
+  router: Object,
 });
-
-const emit = defineEmits(["addSession"]);
-const editingSession = ref("");
 
 const todayStr = formatDateForComparison(new Date());
 
+const sessionStore = useSessionStore();
 const sortedSessionList = computed(() => {
-  props.sessionList.sort((a, b) => {
+  sessionStore.sessionList.sort((a, b) => {
     if (a.performedAt < b.performedAt) return 1;
     if (a.performedAt > b.performedAt) return -1;
     if (a.name < b.name) return -1;
     if (a.name > b.name) return 1;
     return 0;
   });
-  return props.sessionList;
+  return sessionStore.sessionList;
+});
+
+const workoutStore = useWorkoutStore();
+const sortedWorkoutList = computed(() => {
+  workoutStore.workoutList.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
+  return workoutStore.workoutList;
 });
 
 // Group sessions by performedAt date (YYYY-MM-DD)
@@ -48,18 +49,28 @@ const groupedByPerformedAt = computed(() => {
   return groups;
 });
 
-function editSession(session) {
-  if (editingSession.value && editingSession.value !== session) {
-    editingSession.value.editing = false;
-  }
-  editingSession.value = session;
-  session.editing = true;
+async function addSession(workout) {
+  const performedAt = formatDateForComparison(new Date());
+  const newSession = {
+    name: workout.name,
+    performedAt: performedAt,
+    notes: "",
+    workoutNotes: workout.notes,
+  };
+  await sessionStore.saveSessionToAPI(newSession);
 }
 
 function handleSubmit(session) {
-  console.log("handleSubmit", session);
   session.editing = false;
-  // emit('updateSession', session);
+  sessionStore.updateSessionInAPI(session);
+}
+
+async function deleteSession(session) {
+  await sessionStore.deleteSessionFromAPI(session);
+}
+
+async function editSession(session) {
+  props.router.push("session/" + session.id);
 }
 </script>
 
@@ -67,9 +78,9 @@ function handleSubmit(session) {
   <div class="hg-list-group">
     <div class="newSession">
       <div
-        v-for="workout in workoutList"
+        v-for="workout in sortedWorkoutList"
         :key="workout.id"
-        @click="onAddSession(workout)"
+        @click="addSession(workout)"
         class="workout"
       >
         {{ workout.name }}
@@ -85,67 +96,13 @@ function handleSubmit(session) {
       >
         <span class="heading">{{ formatDate(date) }}</span>
         <ul>
-          <li v-for="session in obj.sessions" :key="session.id">
-            <span class="name" @click="editSession(session)">{{
-              session.name
-            }}</span>
-            <span
-              v-if="!session.editing && session.notes"
-              @click="editSession(session)"
-              >{{ session.notes }}</span
-            >
-            <form
-              v-if="session.editing"
-              @submit.prevent="handleSubmit(session)"
-            >
-              <input
-                type="text"
-                id="notes"
-                v-model="session.notes"
-                class="notes"
-                autofocus
-              />
-
-              <button
-                @click="handleDelete()"
-                title="Delete session"
-                class="icon-btn"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="33"
-                  height="33"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                >
-                  <!-- Rectangle with rounded corners -->
-                  <rect
-                    x="2"
-                    y="2"
-                    width="28"
-                    height="28"
-                    rx="8"
-                    fill="none"
-                    stroke="#43a047"
-                    stroke-width="2"
-                  />
-                  <!-- Trash Icon -->
-                  <g
-                    stroke="#43a047"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="7 10 25 10" />
-                    <path
-                      d="M23 10v10a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V10m3 0V8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"
-                    />
-                    <line x1="14" y1="14" x2="14" y2="20" />
-                    <line x1="18" y1="14" x2="18" y2="20" />
-                  </g>
-                </svg>
-              </button>
-            </form>
+          <li
+            v-for="session in obj.sessions"
+            :key="session.id"
+            @click="editSession(session)"
+          >
+            <span class="name">{{ session.name }}</span>
+            <span>{{ session.notes }}</span>
           </li>
         </ul>
       </div>
@@ -187,6 +144,6 @@ button.icon-btn
   padding-left: 0.5rem
   padding-top: 0.3rem
 
-form
+div.form
   display: flex
 </style>

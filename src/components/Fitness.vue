@@ -7,10 +7,7 @@ import { useSessionStore } from "../stores/session";
 import { formatDateForComparison } from "../utils/dateFormatter";
 
 const workoutStore = useWorkoutStore();
-const workoutList = workoutStore.workoutList;
 const sessionStore = useSessionStore();
-const sessionList = sessionStore.sessionList;
-const searchFilter = ref("");
 const router = useRouter();
 const route = useRoute();
 
@@ -18,48 +15,6 @@ onMounted(() => {
   workoutStore.loadWorkoutsFromAPI();
   sessionStore.loadSessionsFromAPI();
 });
-
-const today = new Date();
-function todayStr() {
-  return formatDateForComparison(new Date());
-}
-
-const filteredWorkoutList = computed(() => {
-  if (searchFilter.value === "") return workoutStore.workoutList;
-  return workoutStore.workoutList.filter((workout) =>
-    workout.name.toLowerCase().includes(searchFilter.value.toLowerCase())
-  );
-});
-
-const filteredSessionList = computed(() => {
-  if (searchFilter.value === "") return sessionStore.sessionList;
-  return sessionStore.sessionList.filter((session) =>
-    session.name.toLowerCase().includes(searchFilter.value.toLowerCase())
-  );
-});
-
-const newWorkout = ref({
-  name: "",
-  notes: "",
-});
-
-async function addWorkout(newWorkout) {
-  if (!newWorkout.name) return;
-  await workoutStore.saveWorkoutToAPI(newWorkout);
-
-  resetForm();
-  router.go(-1);
-}
-
-async function addSession(workout) {
-  const performedAt = formatDateForComparison(new Date());
-  const newSession = {
-    name: workout.name,
-    performedAt: performedAt,
-    notes: workout.notes,
-  };
-  await sessionStore.saveSessionToAPI(newSession);
-}
 
 async function updateWorkout(updatedWorkout) {
   const idx = workoutStore.workoutList.findIndex(
@@ -73,21 +28,12 @@ async function updateWorkout(updatedWorkout) {
   router.go(-1);
 }
 
-function resetForm() {
-  newWorkout.value = {
-    id: undefined,
-    name: "",
-    notes: "",
-  };
-}
-
 function cancelForm() {
   resetForm();
   router.go(-1);
 }
 
 function editWorkout(workoutObject) {
-  newWorkout.value = workoutObject;
   router.push("/form");
 }
 
@@ -101,92 +47,14 @@ async function deleteWorkout(deletedWorkout) {
 
 <template>
   <div class="fitness">
-    <div v-if="route.name !== 'form'" class="title">
-      <span>Fitness</span>
-      <input
-        class="action"
-        v-model="searchFilter"
-        type="search"
-        placeholder="Search"
-      />
-    </div>
-    <div v-if="route.name === 'form'" class="title">
-      <span>Workout</span>
-      <a href="" class="action" @click.prevent="cancelForm()">X</a>
-    </div>
-
-    <router-view
-      v-slot="{ Component, route }"
-      :workoutList="filteredWorkoutList"
-      :initialWorkout="newWorkout"
-      :onEdit="editWorkout"
-      :onAddSession="addSession"
-      @add="addWorkout"
-      @update="updateWorkout"
-      @delete="deleteWorkout"
-      @cancel="() => router.go(-1)"
-    >
-      <component
-        :is="Component"
-        v-bind="
-          route.meta.name === 'form'
-            ? {
-                initialWorkout: newWorkout,
-                onAdd: addWorkout,
-                onUpdate: updateWorkout,
-                onDelete: deleteWorkout,
-                onCancel: () => router.push('/'),
-              }
-            : {
-                workoutList: filteredWorkoutList,
-                sessionList: filteredSessionList,
-                onEdit: editWorkout,
-                onAddSession: addSession,
-              }
-        "
-      />
+    <router-view v-slot="{ Component }" :router="router">
+      <component :is="Component" v-bind="{ router: router }" />
     </router-view>
 
     <nav class="tab-bar">
       <ul>
         <li>
           <router-link to="/session" active-class="active">Session</router-link>
-        </li>
-        <li>
-          <router-link to="/form" class="plus-link" active-class="active">
-            <span class="plus-icon">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  x="2"
-                  y="2"
-                  width="18"
-                  height="18"
-                  rx="6"
-                  fill="#f8f8f8"
-                  stroke="#42b883"
-                  stroke-width="2"
-                />
-                <path
-                  d="M11 7V15"
-                  stroke="#42b883"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M7 11H15"
-                  stroke="#42b883"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
-          </router-link>
         </li>
         <li>
           <router-link to="/workout" active-class="active"
@@ -262,7 +130,7 @@ async function deleteWorkout(deletedWorkout) {
           border-color: #42b883
 </style>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap")
 
 .fitness
@@ -369,7 +237,7 @@ async function deleteWorkout(deletedWorkout) {
     ul
       width: 100%
       li
-        width: 33%
+        width: 50%
         a
           padding: 0.7rem
         a.plus-link

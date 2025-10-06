@@ -1,0 +1,125 @@
+<script setup>
+import { ref, computed, watch } from "vue";
+import { useSessionStore } from "../stores/session";
+
+const props = defineProps({
+  router: Object,
+  id: String,
+});
+
+const sessionStore = useSessionStore();
+if (!sessionStore.sessionList.length) {
+  props.router.push("/session");
+}
+
+const session = ref({ name: "", notes: "" });
+const _session = () => {
+  return sessionStore.sessionList.find((w) => {
+    return w.id.toString() === props.id.toString();
+  });
+};
+if (_session) {
+  session.value = { ..._session() };
+}
+
+async function handleSubmit() {
+  if (session.value.name.trim() === "") return;
+
+  await sessionStore.updateSessionInAPI(session.value);
+
+  props.router.push("/session");
+}
+
+async function deleteSession() {
+  await sessionStore.deleteSessionFromAPI(session.value);
+
+  props.router.push("/session");
+}
+</script>
+
+<template>
+  <div>
+    <div class="title">
+      <span>Session</span>
+      <a href="" class="action" @click.prevent="handleCancel()">X</a>
+    </div>
+    <div class="hg-list-group">
+      <form @submit.prevent="handleSubmit">
+        <p>
+          <label>Name</label>
+          <input ref="name" v-model="session.name" required autofocus />
+        </p>
+        <p>
+          <label>Notes</label>
+          <input v-model="session.notes" placeholder="Notes" type="text" />
+        </p>
+        <p>
+          <label>Workout Notes</label>
+          <textarea
+            v-model="session.workoutNotes"
+            placeholder="Notes"
+          ></textarea>
+        </p>
+        <p>
+          <button type="submit">Update Session</button>
+        </p>
+        <p>
+          <a href="" @click.prevent="deleteSession">Delete Session</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</template>
+
+<style lang="sass" scoped>
+.hg-list-group
+  position: relative
+
+  .panel-actions
+    position: absolute
+    top: 0.5rem
+    right: 0.5rem
+    z-index: 2
+
+.icon-btn
+  span
+    position: relative
+    top: -0.3rem
+
+form
+  display: flex
+  flex-direction: column
+  gap: 0.5rem
+
+  p
+    margin: 0
+    padding: 0.5rem
+    padding-left: 1rem
+    padding-right: 1rem
+
+  label
+    display: block
+    text-align: left
+
+  input
+    width: 50%
+
+  textarea
+    width: calc(100% - 2rem)
+
+  input,
+  select,
+  textarea
+    display: block
+
+  input,
+  textarea,
+  select
+    padding: 0.5rem
+    border: 1px solid #ccc
+    border-radius: 4px
+    font-family: "Google Sans", Arial, sans-serif
+
+  span.fieldValue
+    font-weight: bold
+</style>

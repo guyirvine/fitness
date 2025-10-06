@@ -22,6 +22,12 @@ export const useSessionStore = defineStore('session', () => {
   }
 
   async function updateSessionInAPI(session) {
+    const idx = sessionList.value.findIndex(
+      (w) => w.id === session.id
+    );
+    if (idx >= 0) {
+      sessionList.value[idx] = { ...session };
+    }
     localStorage.sessionList = JSON.stringify(sessionList.value);
   }
 
