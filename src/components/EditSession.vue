@@ -64,10 +64,7 @@ async function handleCancel() {
         <p>
           <label
             >Workout Notes
-            <textarea
-              v-model="session.workoutNotes"
-              placeholder="Notes"
-            ></textarea>
+            <pre>{{ session.workoutNotes }}</pre>
           </label>
         </p>
         <p>
