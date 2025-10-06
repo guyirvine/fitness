@@ -73,4 +73,15 @@ async function editWorkout(workout) {
   &:hover
     border-color: #999
     color: #333
+
+ul
+  padding-left: 0
+  margin-top: 0
+
+  li
+    list-style-type: none
+
+    pre
+      margin-top: 0.3rem
+      margin-bottom: 0.3rem
 </style>
