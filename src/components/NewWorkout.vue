@@ -85,13 +85,9 @@ form
     width: calc(100% - 2rem)
 
   input,
-  select,
-  textarea
-    display: block
-
-  input,
   textarea,
   select
+    display: block
     padding: 0.5rem
     border: 1px solid #ccc
     border-radius: 4px
