@@ -13,34 +13,6 @@ onMounted(() => {
   workoutStore.loadWorkoutsFromAPI();
   sessionStore.loadSessionsFromAPI();
 });
-
-async function updateWorkout(updatedWorkout) {
-  const idx = workoutStore.workoutList.findIndex(
-    (p) => p.id === updatedWorkout.id
-  );
-  if (idx >= 0) {
-    workoutStore.workoutList[idx] = { ...updatedWorkout };
-    await workoutStore.updateWorkoutInAPI(updatedWorkout);
-  }
-  resetForm();
-  router.go(-1);
-}
-
-function cancelForm() {
-  resetForm();
-  router.go(-1);
-}
-
-function editWorkout(workoutObject) {
-  router.push("/form");
-}
-
-async function deleteWorkout(deletedWorkout) {
-  await workoutStore.deleteWorkoutFromAPI(deletedWorkout);
-
-  resetForm();
-  router.go(-1);
-}
 </script>
 
 <template>
