@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref } from "vue";
 import { useSessionStore } from "../stores/session";
 
 const props = defineProps({
@@ -35,6 +35,10 @@ async function deleteSession() {
 
   props.router.push("/session");
 }
+
+async function handleCancel() {
+  props.router.go(-1);
+}
 </script>
 
 <template>
@@ -46,19 +50,25 @@ async function deleteSession() {
     <div class="hg-list-group">
       <form @submit.prevent="handleSubmit">
         <p>
-          <label>Name</label>
-          <input ref="name" v-model="session.name" required autofocus />
+          <label
+            >Name
+            <input ref="name" v-model="session.name" required autofocus />
+          </label>
         </p>
         <p>
-          <label>Notes</label>
-          <input v-model="session.notes" placeholder="Notes" type="text" />
+          <label
+            >Notes
+            <input v-model="session.notes" placeholder="Notes" type="text" />
+          </label>
         </p>
         <p>
-          <label>Workout Notes</label>
-          <textarea
-            v-model="session.workoutNotes"
-            placeholder="Notes"
-          ></textarea>
+          <label
+            >Workout Notes
+            <textarea
+              v-model="session.workoutNotes"
+              placeholder="Notes"
+            ></textarea>
+          </label>
         </p>
         <p>
           <button type="submit">Update Session</button>
