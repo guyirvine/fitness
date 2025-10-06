@@ -1,10 +1,8 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { addDays } from "date-fns";
 import { useWorkoutStore } from "../stores/workout";
 import { useSessionStore } from "../stores/session";
-import { formatDateForComparison } from "../utils/dateFormatter";
 
 const workoutStore = useWorkoutStore();
 const sessionStore = useSessionStore();
