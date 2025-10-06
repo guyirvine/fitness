@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { formatDate, formatDateForComparison } from "../utils/dateFormatter";
 import { useSessionStore } from "../stores/session";
 import { useWorkoutStore } from "../stores/workout";
