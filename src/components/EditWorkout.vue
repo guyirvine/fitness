@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref } from "vue";
 import { useWorkoutStore } from "../stores/workout";
 
 const props = defineProps({
