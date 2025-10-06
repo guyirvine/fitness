@@ -67,7 +67,6 @@ async function editWorkout(workout) {
   padding: 0rem 0.5rem
   border-radius: 50%
   color: #42b883
-  border: 1px solid #42b883
   background-color: #b2dfdb
   text-align: center
   cursor: pointer
