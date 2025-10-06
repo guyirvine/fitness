@@ -52,12 +52,16 @@ async function deleteWorkout() {
     <div class="hg-list-group">
       <form @submit.prevent="handleSubmit">
         <p>
-          <label>Name</label>
-          <input ref="name" v-model="workout.name" required />
+          <label
+            >Name
+            <input ref="name" v-model="workout.name" required />
+          </label>
         </p>
         <p>
-          <label>Notes</label>
-          <textarea v-model="workout.notes" placeholder="Notes"></textarea>
+          <label
+            >Notes
+            <textarea v-model="workout.notes" placeholder="Notes"></textarea>
+          </label>
         </p>
         <p>
           <button type="submit">Update Workout</button>
