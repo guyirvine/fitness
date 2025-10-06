@@ -29,12 +29,16 @@ function handleCancel() {
     <div class="hg-list-group">
       <form @submit.prevent="handleSubmit">
         <p>
-          <label>Name</label>
-          <input ref="name" v-model="newWorkout.name" required autofocus />
+          <label
+            >Name
+            <input ref="name" v-model="newWorkout.name" required autofocus />
+          </label>
         </p>
         <p>
-          <label>Notes</label>
-          <textarea v-model="newWorkout.notes" placeholder="Notes"></textarea>
+          <label
+            >Notes
+            <textarea v-model="newWorkout.notes" placeholder="Notes"></textarea>
+          </label>
         </p>
         <p>
           <button type="submit">Add Workout</button>
