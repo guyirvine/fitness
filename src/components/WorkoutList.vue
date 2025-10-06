@@ -46,14 +46,12 @@ async function editWorkout(workout) {
               <pre v-if="workout.notes">{{ workout.notes }}</pre>
             </li>
           </ul>
-          <div class="newWorkout" @click="props.router.push('/newworkout')">
-            +
-          </div>
         </div>
       </template>
       <template v-else>
         <div class="empty-state">No workouts</div>
       </template>
+      <div class="newWorkout" @click="props.router.push('/newworkout')">+</div>
     </div>
   </div>
 </template>
