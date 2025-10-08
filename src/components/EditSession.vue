@@ -17,7 +17,12 @@ const _session = computed(() => {
   const s = sessionStore.sessionList.find((w) => {
     return w.id.toString() === props.id.toString();
   });
-  if (s) session.value = { ...s };
+  if (s) {
+    session.value = { ...s };
+    if (!session.value.workoutNotes) {
+      session.value.workoutNotes = " - ";
+    }
+  }
 
   return s;
 });

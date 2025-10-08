@@ -105,4 +105,8 @@ a:hover {
 
 pre {
   text-wrap: auto;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  padding: 0.7rem;
+  overflow-x: auto;
 }
