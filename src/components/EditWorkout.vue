@@ -50,8 +50,8 @@ async function deleteWorkout() {
 <template>
   <div>
     <div class="title">
+      <a href="" class="action" @click.prevent="handleCancel()">⟨</a>
       <span>{{ _workout.name }}</span>
-      <a href="" class="action" @click.prevent="handleCancel()">X</a>
     </div>
     <div class="hg-list-group">
       <form @submit.prevent="handleSubmit">

@@ -137,11 +137,11 @@ const activatedTab = computed(() => {
       font-size: 1.3rem
 
     .action
-      float: right
       margin-right: 1.3rem
 
     a.action
-      font-size: 1.3rem
+      font-weight: bold
+      font-size: 1.5rem
       color: #388e3c
 
     input

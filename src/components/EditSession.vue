@@ -50,6 +50,7 @@ async function handleCancel() {
 <template>
   <div>
     <div class="title">
+      <a href="" class="action" @click.prevent="handleCancel()">⟨</a>
       <span
         >{{ _session.name }}
 
@@ -57,7 +58,6 @@ async function handleCancel() {
           format(new Date(_session.performedAt), "cccc, d MMM").toUpperCase()
         }}</span>
       </span>
-      <a href="" class="action" @click.prevent="handleCancel()">X</a>
     </div>
     <div class="hg-list-group">
       <form @submit.prevent="handleSubmit">
