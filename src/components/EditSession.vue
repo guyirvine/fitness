@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useSessionStore } from "../stores/session";
 
 const props = defineProps({
@@ -13,14 +13,14 @@ if (!sessionStore.sessionList.length) {
 }
 
 const session = ref({ name: "", notes: "" });
-const _session = () => {
-  return sessionStore.sessionList.find((w) => {
+const _session = computed(() => {
+  const s = sessionStore.sessionList.find((w) => {
     return w.id.toString() === props.id.toString();
   });
-};
-if (_session) {
-  session.value = { ..._session() };
-}
+  if (s) session.value = { ...s };
+
+  return s;
+});
 
 async function handleSubmit() {
   if (session.value.name.trim() === "") return;
@@ -44,7 +44,7 @@ async function handleCancel() {
 <template>
   <div>
     <div class="title">
-      <span>Session</span>
+      <span>{{ _session.name }}</span>
       <a href="" class="action" @click.prevent="handleCancel()">X</a>
     </div>
     <div class="hg-list-group">
