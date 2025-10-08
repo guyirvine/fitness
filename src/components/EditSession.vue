@@ -68,6 +68,16 @@ async function handleCancel() {
         </p>
         <p>
           <label
+            >Session date
+            <input
+              v-model="session.performedAt"
+              placeholder="Performed At"
+              type="date"
+            />
+          </label>
+        </p>
+        <p>
+          <label
             >Workout Notes
             <pre>{{ session.workoutNotes }}</pre>
           </label>
