@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useSessionStore } from "../stores/session";
+import { format } from "date-fns";
 
 const props = defineProps({
   router: Object,
@@ -49,7 +50,13 @@ async function handleCancel() {
 <template>
   <div>
     <div class="title">
-      <span>{{ _session.name }}</span>
+      <span
+        >{{ _session.name }}
+
+        <span class="date">{{
+          format(new Date(_session.performedAt), "cccc, d MMM").toUpperCase()
+        }}</span>
+      </span>
       <a href="" class="action" @click.prevent="handleCancel()">X</a>
     </div>
     <div class="hg-list-group">
@@ -107,6 +114,12 @@ async function handleCancel() {
   span
     position: relative
     top: -0.3rem
+
+.title
+  .date
+    font-size: 0.8rem
+    margin-left: 1rem
+    text-transform: capitalize
 
 form
   display: flex
