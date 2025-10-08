@@ -113,6 +113,7 @@ form
 
   textarea
     width: calc(100% - 2rem)
+    height: 10rem
 
   input,
   textarea,
