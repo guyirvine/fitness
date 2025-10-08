@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useWorkoutStore } from "../stores/workout";
 
 const props = defineProps({
@@ -13,14 +13,14 @@ if (!workoutStore.workoutList.length) {
 }
 
 const workout = ref({ name: "", notes: "" });
-const _workout = () => {
-  return workoutStore.workoutList.find((w) => {
+const _workout = computed(() => {
+  const w = workoutStore.workoutList.find((w) => {
     return w.id.toString() === props.id.toString();
   });
-};
-if (_workout) {
-  workout.value = { ..._workout() };
-}
+  if (w) workout.value = { ...w };
+
+  return w;
+});
 
 async function handleSubmit() {
   if (workout.value.name.trim() === "") return;
@@ -46,7 +46,7 @@ async function deleteWorkout() {
 <template>
   <div>
     <div class="title">
-      <span>Workout</span>
+      <span>{{ _workout.name }}</span>
       <a href="" class="action" @click.prevent="handleCancel()">X</a>
     </div>
     <div class="hg-list-group">
