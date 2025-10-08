@@ -36,6 +36,10 @@ async function handleSubmit() {
   props.router.push("/workout");
 }
 
+async function handleCancel() {
+  props.router.go(-1);
+}
+
 async function deleteWorkout() {
   await workoutStore.deleteWorkoutFromAPI(workout.value);
 
