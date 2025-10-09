@@ -84,10 +84,8 @@ async function handleCancel() {
           </label>
         </p>
         <p>
-          <label
-            >Workout Notes
-            <pre>{{ session.workoutNotes }}</pre>
-          </label>
+          <span>Workout Notes</span>
+          <pre>{{ session.workoutNotes }}</pre>
         </p>
         <p>
           <button type="submit">Update Session</button>
