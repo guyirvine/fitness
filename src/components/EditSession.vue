@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useSessionStore } from "../stores/session";
 import { format } from "date-fns";
 
@@ -14,19 +14,24 @@ if (!sessionStore.sessionList.length) {
 }
 
 const session = ref({ name: "", notes: "" });
-const _session = computed(() => {
-  const s = sessionStore.sessionList.find((w) => {
-    return w.id.toString() === props.id.toString();
-  });
-  if (s) {
-    session.value = { ...s };
-    if (!session.value.workoutNotes) {
-      session.value.workoutNotes = " - ";
-    }
-  }
+const _session = computed(() =>
+  sessionStore.sessionList.find((w) => w.id.toString() === props.id.toString())
+);
 
-  return s;
-});
+// Copy the found session into the local `session` ref without causing
+// side-effects inside the computed getter (which can cause recursive updates).
+watch(
+  _session,
+  (s) => {
+    if (s) {
+      session.value = { ...s };
+      if (!session.value.workoutNotes) {
+        session.value.workoutNotes = " - ";
+      }
+    }
+  },
+  { immediate: true }
+);
 
 async function handleSubmit() {
   if (session.value.name.trim() === "") return;
@@ -83,10 +88,10 @@ async function handleCancel() {
             />
           </label>
         </p>
-        <p>
+        <div class="workout-notes">
           <span>Workout Notes</span>
           <pre>{{ session.workoutNotes }}</pre>
-        </p>
+        </div>
         <p>
           <button type="submit">Update Session</button>
         </p>

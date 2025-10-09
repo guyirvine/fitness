@@ -29,3 +29,12 @@ run_local_prod:
 
 test:
 	npm test
+
+test-coverage:
+	@echo "Running tests with coverage..."
+	@npm run test:coverage
+	@if [ -f coverage/lcov.info ]; then \
+		echo "Coverage report generated at coverage/lcov.info"; \
+		else \
+		echo "ERROR: coverage/lcov.info not found"; exit 1; \
+		fi
