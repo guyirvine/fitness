@@ -155,6 +155,7 @@ const activatedTab = computed(() => {
 
 <style lang="sass">
 .hg-list-group
+  position: relative
   margin-top: 0
   padding: 1rem
   padding-top: 0.7rem
@@ -223,59 +224,46 @@ const activatedTab = computed(() => {
           padding: 0.7rem
 </style>
 
-<style lang="sass" scoped>
-/* The switch - the box around the slider */
-.switch
-  position: relative
-  display: inline-block
-  width: 45px
-  height: 24px
-  margin-top: 0.75rem
+<style lang="sass">
+pre
+  text-wrap: auto
+  border: 1px solid #ccc
+  background: #f8f8f8
+  margin-top: 0.3rem
+  margin-bottom: 0.3rem
+  padding: 0.7rem
+  overflow-x: auto
 
-  /* Hide default HTML checkbox */
-  & input
-    opacity: 0
-    width: 0
-    height: 0
+form
+  display: flex
+  flex-direction: column
+  gap: 0.5rem
 
-/* The slider */
-.slider
-  position: absolute
-  cursor: pointer
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: #ccc
-  -webkit-transition: .4s
-  transition: .4s
+  p
+    margin: 0
+    padding: 0.5rem
+    padding-left: 0
+    padding-right: 0
 
-  &:before
-    position: absolute
-    content: ""
-    height: 16px
-    width: 16px
-    left: 4px
-    bottom: 4px
-    background-color: white
-    -webkit-transition: .4s
-    transition: .4s
+  label
+    display: block
+    text-align: left
 
-  input:checked + &
-    background-color: #42b883
+  input
+    width: 50%
 
-  input:focus + &
-    box-shadow: 0 0 1px #42b883
+  textarea
+    width: calc(100% - 2rem)
 
-  input:checked + &:before
-    -webkit-transform: translateX(22px)
-    -ms-transform: translateX(22px)
-    transform: translateX(22px)
+  input,
+  textarea,
+  select
+    display: block
+    padding: 0.5rem
+    border: 1px solid #ccc
+    border-radius: 4px
+    font-family: "Google Sans", Arial, sans-serif
 
-  /* Rounded sliders */
-  &.round
-    border-radius: 24px
-
-  &.round:before
-    border-radius: 50%
+  span.fieldValue
+    font-weight: bold
 </style>

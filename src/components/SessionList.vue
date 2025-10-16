@@ -134,22 +134,4 @@ async function editSession(session) {
     color: white
     display: inline-block
     cursor: pointer
-
-input.notes
-  width: 60%
-  padding: 0.3rem
-  margin-top: 0.1rem
-  margin-left: 1rem
-
-  &:focus
-    border-color: #42b883
-
-button.icon-btn
-  background-color: transparent
-  padding: 0
-  padding-left: 0.5rem
-  padding-top: 0.3rem
-
-div.form
-  display: flex
 </style>

@@ -80,8 +80,4 @@ ul
 
   li
     list-style-type: none
-
-    pre
-      margin-top: 0.3rem
-      margin-bottom: 0.3rem
 </style>

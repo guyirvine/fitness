@@ -104,54 +104,9 @@ async function handleCancel() {
 </template>
 
 <style lang="sass" scoped>
-.hg-list-group
-  position: relative
-
-  .panel-actions
-    position: absolute
-    top: 0.5rem
-    right: 0.5rem
-    z-index: 2
-
-.icon-btn
-  span
-    position: relative
-    top: -0.3rem
-
 .title
   .date
     font-size: 0.8rem
     margin-left: 1rem
     text-transform: capitalize
-
-form
-  display: flex
-  flex-direction: column
-  gap: 0.5rem
-
-  p
-    margin: 0
-    padding-bottom: 0.5rem
-
-  label
-    display: block
-    text-align: left
-
-  input
-    width: 50%
-
-  textarea
-    width: calc(100% - 2rem)
-
-  input,
-  textarea,
-  select
-    display: flex
-    padding: 0.5rem
-    border: 1px solid #ccc
-    border-radius: 4px
-    font-family: "Google Sans", Arial, sans-serif
-
-  span.fieldValue
-    font-weight: bold
 </style>

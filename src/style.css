@@ -61,34 +61,8 @@ button:focus-visible {
   background-color: gainsboro;
 }
 
-.panel {
-  border: 1px solid black;
-  border-radius: 8px;
-  background: #66CDAA;
-  padding: 1rem;
-  position: relative;
-}
-.panel p {
-    display: block;
-    text-align: left;
-}
-
-div.panel-actions {
-  display: inline-block;
-  margin-left: 0.7rem;
-}
-div.panel-actions button {
-  padding: 0.1em;
-  background-color: transparent
-}
-
-li div.panel-actions button svg {
-  stroke-opacity: 0;
-}
-
-li:hover div.panel-actions button svg {
-  stroke-opacity: 1;
-}
+/* .panel and related selectors were removed because they're not used in templates.
+   Keep this comment here in case these styles are needed later. */
 
 a:hover {
   color: #747bff;
@@ -103,11 +77,3 @@ a:hover {
   }
 }
 
-pre {
-  text-wrap: auto;
-  border: 1px solid #ccc;
-  background: #f8f8f8;
-  margin-top: 0;
-  padding: 0.7rem;
-  overflow-x: auto;
-}
