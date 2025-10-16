@@ -165,8 +165,8 @@ const activatedTab = computed(() => {
     margin: 0
 
     &.today
-      border-bottom: 3px solid #42b883
-      background-color: #b2dfdb
+      border-left: 3px solid #42b883
+      padding-left: 0.3rem
 
     & .heading
       margin-top: 0
