@@ -148,7 +148,7 @@ form
   input,
   textarea,
   select
-    display: block
+    display: flex
     padding: 0.5rem
     border: 1px solid #ccc
     border-radius: 4px
