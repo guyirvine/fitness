@@ -75,41 +75,46 @@ async function editSession(session) {
 </script>
 
 <template>
-  <div class="hg-list-group">
-    <div class="newSession">
-      <div
-        v-for="workout in sortedWorkoutList"
-        :key="workout.id"
-        @click="addSession(workout)"
-        class="workout"
-      >
-        {{ workout.name }}
-      </div>
+  <div>
+    <div class="title">
+      <span>fitness</span>
     </div>
-    <template v-if="Object.keys(groupedByPerformedAt).length">
-      <div
-        v-for="(obj, date) in groupedByPerformedAt"
-        :key="date"
-        class="hg-list-date-group"
-        :class="{ today: obj.today }"
-        :id="'group-today'"
-      >
-        <span class="heading">{{ formatDate(date) }}</span>
-        <ul>
-          <li
-            v-for="session in obj.sessions"
-            :key="session.id"
-            @click="editSession(session)"
-          >
-            <span class="name">{{ session.name }}</span>
-            <span>{{ session.notes }}</span>
-          </li>
-        </ul>
+    <div class="hg-list-group">
+      <div class="newSession">
+        <div
+          v-for="workout in sortedWorkoutList"
+          :key="workout.id"
+          @click="addSession(workout)"
+          class="workout"
+        >
+          {{ workout.name }}
+        </div>
       </div>
-    </template>
-    <template v-else>
-      <div class="empty-state">No sessions</div>
-    </template>
+      <template v-if="Object.keys(groupedByPerformedAt).length">
+        <div
+          v-for="(obj, date) in groupedByPerformedAt"
+          :key="date"
+          class="hg-list-date-group"
+          :class="{ today: obj.today }"
+          :id="'group-today'"
+        >
+          <span class="heading">{{ formatDate(date) }}</span>
+          <ul>
+            <li
+              v-for="session in obj.sessions"
+              :key="session.id"
+              @click="editSession(session)"
+            >
+              <span class="name">{{ session.name }}</span>
+              <span>{{ session.notes }}</span>
+            </li>
+          </ul>
+        </div>
+      </template>
+      <template v-else>
+        <div class="empty-state">No sessions</div>
+      </template>
+    </div>
   </div>
 </template>
 

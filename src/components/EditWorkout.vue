@@ -100,9 +100,7 @@ form
 
   p
     margin: 0
-    padding: 0.5rem
-    padding-left: 1rem
-    padding-right: 1rem
+    padding-bottom: 0.5rem
 
   label
     display: block

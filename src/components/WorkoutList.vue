@@ -30,7 +30,7 @@ async function editWorkout(workout) {
 <template>
   <div>
     <div class="title">
-      <span>Workouts</span>
+      <span>fitness</span>
     </div>
     <div class="hg-list-group">
       <template v-if="sortedWorkoutList.length">

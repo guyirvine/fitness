@@ -122,23 +122,23 @@ const activatedTab = computed(() => {
   font-family: "Google Sans", Arial, sans-serif
 
   .title
-    display: block
-    padding-bottom: 1.3rem
-    padding-top: 1.3rem
-    padding-left: 1.3rem
+    display: flex
+    padding-bottom: 0.7rem
+    padding-top: 0.7rem
+    padding-left: 1rem
     border-bottom: 1px solid #42b883
     color: #388e3c
 
     span
-      font-weight: bold
+      font-weight: 100
       font-size: 1.3rem
 
     .action
-      margin-right: 1.3rem
+      padding-top: 0.1rem
+      margin-right: 0.7rem
 
     a.action
       font-weight: bold
-      font-size: 1.5rem
       color: #388e3c
 
     input
@@ -156,13 +156,12 @@ const activatedTab = computed(() => {
 <style lang="sass">
 .hg-list-group
   margin-top: 0
-  padding: 0.7rem
+  padding: 1rem
+  padding-top: 0.7rem
   padding-bottom: 4rem
 
   .hg-list-date-group
-    padding: 0.5rem
-    padding-left: 1rem
-    padding-right: 1rem
+    padding-top: 0.5rem
     margin: 0
 
     &.today
