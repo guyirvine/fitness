@@ -79,17 +79,17 @@ async function editSession(session) {
     <div class="title">
       <span>fitness</span>
     </div>
-    <div class="hg-list-group">
-      <div class="newSession">
-        <div
-          v-for="workout in sortedWorkoutList"
-          :key="workout.id"
-          @click="addSession(workout)"
-          class="workout"
-        >
-          {{ workout.name }}
-        </div>
+    <div class="newSession">
+      <div
+        v-for="workout in sortedWorkoutList"
+        :key="workout.id"
+        @click="addSession(workout)"
+        class="workout"
+      >
+        {{ workout.name }}
       </div>
+    </div>
+    <div class="hg-list-group">
       <template v-if="Object.keys(groupedByPerformedAt).length">
         <div
           v-for="(obj, date) in groupedByPerformedAt"
@@ -122,7 +122,8 @@ async function editSession(session) {
 .newSession
   overflow-x: scroll
   white-space: nowrap
-  padding-bottom: 0.7rem
+  padding-top: 0.3rem
+  padding-bottom: 0.3rem
   border-bottom: 1px solid #42b883
 
   .workout
