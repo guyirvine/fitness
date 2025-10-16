@@ -58,7 +58,7 @@ const activatedTab = computed(() => {
   position: sticky
   bottom: 0
   z-index: 1000
-  background-color: white
+  background-color: #FCFCFC
   border-top: 1px solid #42b883
 
   ul
