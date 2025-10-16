@@ -90,9 +90,6 @@ const activatedTab = computed(() => {
           border-top: 3px solid #42b883
           color: #42b883
 
-        &:hover
-          background: #b2dfdb
-
       .plus-link
         padding: 0.5rem 1.1rem
 
