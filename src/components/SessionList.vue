@@ -106,7 +106,7 @@ async function editSession(session) {
               @click="editSession(session)"
             >
               <span class="name">{{ session.name }}</span>
-              <span>{{ session.notes }}</span>
+              <span class="notes">{{ session.notes }}</span>
             </li>
           </ul>
         </div>
@@ -134,4 +134,33 @@ async function editSession(session) {
     color: white
     display: inline-block
     cursor: pointer
+
+.hg-list-group
+
+  .hg-list-date-group
+
+    &.today
+
+      ul
+        border-left: 3px solid #42b883
+        padding-left: 1.5rem
+
+    ul
+      padding-left: 1rem
+      margin-top: 0
+      margin-bottom: 0
+
+      li
+        margin-top: 0.1rem
+        margin-bottom: 0.3rem
+        cursor: pointer
+
+        span
+          font-size: 0.8rem
+
+        span.name
+          font-weight: bold
+
+        span.notes
+          margin-left: 0.7rem
 </style>

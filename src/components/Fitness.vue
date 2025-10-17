@@ -165,33 +165,12 @@ const activatedTab = computed(() => {
     padding-top: 0.5rem
     margin: 0
 
-    &.today
-      border-left: 3px solid #42b883
-      padding-left: 0.3rem
-
     & .heading
       margin-top: 0
       font-weight: bold
       /* color: #1976d2 */
       color: #388e3c
       display: block
-
-    ul
-      padding-left: 1rem
-      margin-top: 0
-      margin-bottom: 0
-
-      li
-        margin-top: 0.1rem
-        margin-bottom: 0.3rem
-        cursor: pointer
-
-        span
-          margin-left: 0.7rem
-          font-size: 0.8rem
-
-        span.name
-          font-weight: bold
 </style>
 
 <style lang="sass" scoped>
