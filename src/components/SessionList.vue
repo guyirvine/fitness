@@ -199,7 +199,6 @@ async function onTouchEnd(e, id) {
         margin-bottom: 0.3rem
         cursor: pointer
         position: relative
-        overflow: hidden
 
         &.swipe-delete
           position: relative
