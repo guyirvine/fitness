@@ -50,8 +50,11 @@ describe('SessionList.vue', () => {
 
   it('navigates to edit session when a session is clicked', async () => {
     const wrapper = mount(SessionList, { props: { router } })
-    const li = wrapper.find('li')
-    await li.trigger('click')
+    // find the session list item by its text so test is robust
+    const items = wrapper.findAll('li')
+    const sessionItem = items.find((i) => i.text().includes('Morning Yoga'))
+    expect(sessionItem).toBeTruthy()
+    await sessionItem.trigger('click')
     expect(router.push).toHaveBeenCalled()
   })
 })

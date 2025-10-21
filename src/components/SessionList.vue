@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { formatDate, formatDateForComparison } from "../utils/dateFormatter";
 import { useSessionStore } from "../stores/session";
 import { useWorkoutStore } from "../stores/workout";
@@ -67,10 +67,46 @@ function handleSubmit(session) {
 
 async function deleteSession(session) {
   await sessionStore.deleteSessionFromAPI(session);
+  // clear any swipe state
+  if (activeSwipedId.value === session.id) activeSwipedId.value = null;
 }
 
 async function editSession(session) {
   props.router.push("session/" + session.id);
+}
+
+// Swipe handling for mobile: reveal delete button when swiped left
+const touchStartX = ref({});
+const activeSwipedId = ref(null);
+const SWIPE_THRESHOLD = 50;
+
+function onTouchStart(e, id) {
+  touchStartX.value[id] = e.touches[0].clientX;
+}
+
+function onTouchMove(e, id) {
+  const startX = touchStartX.value[id];
+  if (startX === undefined) return;
+  const deltaX = e.touches[0].clientX - startX;
+  // track swipe state for styling
+  if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+    activeSwipedId.value = deltaX < 0 ? id : null;
+  }
+}
+
+async function onTouchEnd(e, id) {
+  const startX = touchStartX.value[id];
+  if (startX === undefined) return;
+
+  const deltaX = e.changedTouches[0].clientX - startX;
+  // if swiped left far enough, delete
+  if (deltaX < -SWIPE_THRESHOLD) {
+    const session = sortedSessionList.value.find((s) => s.id === id);
+    if (session) {
+      await deleteSession(session);
+    }
+  }
+  delete touchStartX.value[id];
 }
 </script>
 
@@ -104,9 +140,15 @@ async function editSession(session) {
               v-for="session in obj.sessions"
               :key="session.id"
               @click="editSession(session)"
+              @touchstart="(e) => onTouchStart(e, session.id)"
+              @touchmove="(e) => onTouchMove(e, session.id)"
+              @touchend="(e) => onTouchEnd(e, session.id)"
+              :class="{ 'swipe-delete': activeSwipedId === session.id }"
             >
-              <span class="name">{{ session.name }}</span>
-              <span class="notes">{{ session.notes }}</span>
+              <div class="item-content">
+                <span class="name">{{ session.name }}</span>
+                <span class="notes">{{ session.notes }}</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -156,6 +198,24 @@ async function editSession(session) {
         margin-top: 0.1rem
         margin-bottom: 0.3rem
         cursor: pointer
+        position: relative
+        overflow: hidden
+
+        &.swipe-delete
+          position: relative
+          &::after
+            content: 'Delete'
+            position: absolute
+            right: 0
+            top: 0
+            bottom: 0
+            width: 4rem
+            background-color: #ff5252
+            color: white
+            display: flex
+            align-items: center
+            justify-content: center
+            font-size: 0.9rem
 
         span
           font-size: 0.8rem
