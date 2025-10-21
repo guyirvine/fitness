@@ -71,7 +71,9 @@ async function deleteWorkout() {
           <button type="submit">Update Workout</button>
         </p>
         <p>
-          <a href="" @click.prevent="deleteWorkout">Delete Workout</a>
+          <a href="" @click.prevent="deleteWorkout" class="delete"
+            >Delete Workout</a
+          >
         </p>
       </form>
     </div>

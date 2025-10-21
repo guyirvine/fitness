@@ -96,7 +96,9 @@ async function handleCancel() {
           <button type="submit">Update Session</button>
         </p>
         <p>
-          <a href="" @click.prevent="deleteSession">Delete Session</a>
+          <a href="" @click.prevent="deleteSession" class="delete"
+            >Delete Session</a
+          >
         </p>
       </form>
     </div>

@@ -121,6 +121,9 @@ const activatedTab = computed(() => {
   box-shadow: 0 2px 8px #0001
   font-family: "Google Sans", Arial, sans-serif
 
+  a.delete
+    color: red
+
   .title
     display: flex
     padding-bottom: 0.7rem
