@@ -125,7 +125,7 @@ async function onTouchEnd(e, id) {
         {{ workout.name }}
       </li>
       <li
-        :key="manageWorkouts"
+        :key="'manageWorkouts'"
         @click="props.router.push('/workout')"
         class="workout manageWorkouts"
       >
