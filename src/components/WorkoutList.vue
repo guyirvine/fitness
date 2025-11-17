@@ -30,7 +30,8 @@ async function editWorkout(workout) {
 <template>
   <div>
     <div class="title">
-      <span>fitness</span>
+      <a href="" class="action" @click.prevent="props.router.push('/session')">⟨</a>
+      <span>Workouts</span>
     </div>
     <div class="hg-list-group">
       <template v-if="sortedWorkoutList.length">

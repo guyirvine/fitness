@@ -1,25 +1,18 @@
 <script setup>
-import { onMounted, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { useWorkoutStore } from "../stores/workout";
 import { useSessionStore } from "../stores/session";
 
 const workoutStore = useWorkoutStore();
 const sessionStore = useSessionStore();
 const router = useRouter();
-const route = useRoute();
 
 onMounted(() => {
   workoutStore.loadWorkoutsFromAPI();
   sessionStore.loadSessionsFromAPI();
 });
 
-const activatedTab = computed(() => {
-  console.log("activatedTab", route.name);
-  if (["session", "editsession"].includes(route.name)) return "session";
-
-  return "workout";
-});
 </script>
 
 <template>
@@ -27,25 +20,6 @@ const activatedTab = computed(() => {
     <router-view v-slot="{ Component }" :router="router">
       <component :is="Component" v-bind="{ router: router }" />
     </router-view>
-
-    <nav class="tab-bar">
-      <ul>
-        <li>
-          <router-link
-            to="/session"
-            :class="{ active: activatedTab === 'session' }"
-            >Session</router-link
-          >
-        </li>
-        <li>
-          <router-link
-            to="/workout"
-            :class="{ active: activatedTab === 'workout' }"
-            >Workouts</router-link
-          >
-        </li>
-      </ul>
-    </nav>
   </div>
 </template>
 

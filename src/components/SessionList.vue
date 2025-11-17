@@ -124,6 +124,19 @@ async function onTouchEnd(e, id) {
       >
         {{ workout.name }}
       </li>
+      <li
+        :key="manageWorkouts"
+        @click="props.router.push('/workout')"
+        class="workout manageWorkouts"
+      >
+        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v6m0 6v6"></path>
+          <path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"></path>
+          <path d="M1 12h6m6 0h6"></path>
+          <path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path>
+        </svg>
+      </li>
     </ul>
     <div class="hg-list-group">
       <template v-if="Object.keys(groupedByPerformedAt).length">
@@ -178,6 +191,20 @@ async function onTouchEnd(e, id) {
     color: white
     display: inline-block
     cursor: pointer
+
+  .manageWorkouts
+    background-color: #2196f3
+
+  .settings-icon
+    width: 1.2rem
+    height: 1.2rem
+    animation: spin 3s linear infinite
+
+@keyframes spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
 
 .hg-list-group
 
