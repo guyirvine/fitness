@@ -190,10 +190,10 @@ async function onTouchEnd(e, id) {
   overflow-x: scroll
   white-space: nowrap
   padding-left: 0
+  border-bottom: 1px solid #42B883
   padding-top: 0.3rem
   padding-bottom: 0.3rem
-  border-bottom: 1px solid #42b883
-
+  
   .workout
     border-radius: 0.7rem
     margin: 0.3rem

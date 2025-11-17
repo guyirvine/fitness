@@ -44,7 +44,7 @@ onMounted(() => {
   z-index: 1000
   background-color: #FCFCFC
   height: 2.5rem
-  border-top: 1px solid #42b883
+  border-top: 1px solid #42B883
 
   ul
     display: flex
