@@ -167,7 +167,18 @@ async function onTouchEnd(e, id) {
         </div>
       </template>
       <template v-else>
-        <div class="empty-state">No sessions</div>
+        
+        <template v-if="sortedWorkoutList.length">
+          <div class="empty-state">
+            <span class="error-next">Click one of the <b>workout buttons</b> above to add a session.</span>
+          </div>
+        </template>
+        <template v-else>
+          <div class="empty-state">
+            <span class="error-name">You don't have any <b>workouts</b> listed.</span>
+            <span class="error-next">Click on the <b>settings button</b> above to add a workout then come back here.</span>
+          </div>
+        </template>
       </template>
     </div>
   </div>

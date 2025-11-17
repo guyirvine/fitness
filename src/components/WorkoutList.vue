@@ -50,7 +50,9 @@ async function editWorkout(workout) {
         </div>
       </template>
       <template v-else>
-        <div class="empty-state">No workouts</div>
+        <div class="empty-state">
+          <span class="error-next">Click the <b>plus button</b> on the bottom right to add a workout.</span>
+        </div>
       </template>
       <div class="newWorkout" @click="props.router.push('/newworkout')">+</div>
     </div>

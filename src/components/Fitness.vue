@@ -21,9 +21,19 @@ onMounted(() => {
       <component :is="Component" v-bind="{ router: router }" />
     </router-view>
   </div>
+    <nav class="tab-bar">
+    </nav>
 </template>
 
-<style lang="sass" scoped>
+<style lang="sass">
+.empty-state
+  display: flex
+  flex-direction: column
+  gap: 1rem
+
+  .error-name, .error-next
+  display: flex
+
 .tab-bar
   width: 500px
   display: flex
@@ -33,6 +43,7 @@ onMounted(() => {
   bottom: 0
   z-index: 1000
   background-color: #FCFCFC
+  height: 2.5rem
   border-top: 1px solid #42b883
 
   ul
