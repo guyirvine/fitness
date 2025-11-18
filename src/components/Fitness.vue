@@ -32,7 +32,7 @@ onMounted(() => {
   gap: 1rem
 
   .error-name, .error-next
-  display: flex
+    display: flex
 
 .tab-bar
   width: 500px
