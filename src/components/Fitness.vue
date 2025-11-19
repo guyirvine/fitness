@@ -26,11 +26,41 @@ onMounted(() => {
 </template>
 
 <style lang="sass">
+.horizontal-button-list
+  margin: 0
+  overflow-x: scroll
+  white-space: nowrap
+  padding-left: 0
+  border-bottom: 1px solid #42B883
+  padding-top: 0.3rem
+  padding-bottom: 0.3rem
+  
+  .button
+    border-radius: 0.7rem
+    margin: 0.3rem
+    padding: 0.3rem 0.7rem
+    background-color: #42b883
+    color: white
+    display: inline-block
+    cursor: pointer
+
+  .button-action
+    background-color: #2196f3
+    margin-left: 0.7rem;
+
+  .settings-icon
+    width: 1.2rem
+    height: 1.2rem
+    animation: spin 3s linear infinite
+
+
 .empty-state
   display: flex
   flex-direction: column
   gap: 1rem
-
+  background-color: #EEE;
+  border: 1px solid grey;
+  padding: 0.7rem;
 
 .tab-bar
   width: 500px

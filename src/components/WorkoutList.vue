@@ -33,10 +33,18 @@ async function editWorkout(workout) {
       <a href="" class="action" @click.prevent="props.router.push('/session')">⟨</a>
       <span>Workouts</span>
     </div>
+    <ul class="horizontal-button-list newWorkout">
+      <li
+        @click="props.router.push('/newworkout')"
+        class="button button-action"
+      >
+        Add a Workout
+      </li>
+    </ul>
     <div class="hg-list-group">
       <template v-if="sortedWorkoutList.length">
         <div>
-          <ul>
+          <ul class="workoutList">
             <li
               v-for="workout in sortedWorkoutList"
               :key="workout.id"
@@ -51,33 +59,18 @@ async function editWorkout(workout) {
       </template>
       <template v-else>
         <div class="empty-state">
-          <span class="error-next">Click the <b>plus button</b> on the bottom right to add a workout.</span>
+          <span class="error-next">Hit <b>Add a Workout</b> to get started.</span>
         </div>
       </template>
-      <div class="newWorkout" @click="props.router.push('/newworkout')">+</div>
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-.newWorkout
-  position: fixed
-  bottom: 3.7rem
-  right: 0.7rem
-  font-size: 2.3rem
-  padding: 0rem 0.5rem
-  border-radius: 50%
-  color: #42b883
-  background-color: #b2dfdb
-  text-align: center
-  cursor: pointer
-  line-height: 2.7rem
-
-  &:hover
-    border-color: #999
-    color: #333
-
-ul
+.empty-state
+  padding: 1.7rem
+  
+.workoutList
   padding-left: 0
   margin-top: 0
 

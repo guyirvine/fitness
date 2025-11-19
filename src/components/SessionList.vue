@@ -115,21 +115,21 @@ async function onTouchEnd(e, id) {
     <div class="title">
       <span>fitness</span>
     </div>
-    <ul class="newSession">
+    <ul class="horizontal-button-list newSession">
       <li
         v-for="workout in sortedWorkoutList"
         :key="workout.id"
         @click="addSession(workout)"
-        class="workout"
+        class="button"
       >
         {{ workout.name }}
       </li>
       <li
         :key="'manageWorkouts'"
         @click="props.router.push('/workout')"
-        class="workout manageWorkouts"
+        class="button button-action"
       >
-        Edit
+        Manage Workouts
       </li>
     </ul>
     <div class="hg-list-group">
@@ -169,8 +169,8 @@ async function onTouchEnd(e, id) {
         </template>
         <template v-else>
           <div class="empty-state">
-            <span class="error-name">You don't have any <b>workouts</b> listed.</span>
-            <span class="error-next">Click on the <b>settings button</b> above to add a workout then come back here.</span>
+            <span class="error-name">To add a <b>session</b> you need at least one <b>workout</b> loaded.</span>
+            <span class="error-next">Hit <b>Manage Workouts</b> above to get started.</span>
           </div>
         </template>
       </template>
@@ -179,32 +179,6 @@ async function onTouchEnd(e, id) {
 </template>
 
 <style lang="sass" scoped>
-.newSession
-  margin: 0
-  overflow-x: scroll
-  white-space: nowrap
-  padding-left: 0
-  border-bottom: 1px solid #42B883
-  padding-top: 0.3rem
-  padding-bottom: 0.3rem
-  
-  .workout
-    border-radius: 0.7rem
-    margin: 0.3rem
-    padding: 0.3rem 0.7rem
-    background-color: #42b883
-    color: white
-    display: inline-block
-    cursor: pointer
-
-  .manageWorkouts
-    background-color: #2196f3
-
-  .settings-icon
-    width: 1.2rem
-    height: 1.2rem
-    animation: spin 3s linear infinite
-
 @keyframes spin
   from
     transform: rotate(0deg)
