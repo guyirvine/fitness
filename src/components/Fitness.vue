@@ -31,8 +31,6 @@ onMounted(() => {
   flex-direction: column
   gap: 1rem
 
-  .error-name, .error-next
-    display: flex
 
 .tab-bar
   width: 500px
