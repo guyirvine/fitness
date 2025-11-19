@@ -33,9 +33,8 @@ async function editWorkout(workout) {
       <a href="" class="action" @click.prevent="props.router.push('/session')">⟨</a>
       <span>Workouts</span>
     </div>
-    <ul class="horizontal-button-list newWorkout">
+    <ul class="horizontal-button-list newWorkout" @click="props.router.push('/newworkout')">
       <li
-        @click="props.router.push('/newworkout')"
         class="button button-action"
       >
         Add a Workout

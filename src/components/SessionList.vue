@@ -9,17 +9,28 @@ const props = defineProps({
 });
 
 const todayStr = formatDateForComparison(new Date());
-
+const showSearchFilter = ref(false);
+const searchFilter = ref("");
 const sessionStore = useSessionStore();
+
+const filteredSessionList = computed(() => {
+  const criteria = searchFilter.value.trim().toLowerCase();
+  if (criteria === "") return sessionStore.sessionList;
+
+  return sessionStore.sessionList.filter((s) => {
+    return s.name.toLowerCase().includes(criteria)
+  })
+});
+
 const sortedSessionList = computed(() => {
-  sessionStore.sessionList.sort((a, b) => {
+  filteredSessionList.value.sort((a, b) => {
     if (a.performedAt < b.performedAt) return 1;
     if (a.performedAt > b.performedAt) return -1;
     if (a.name < b.name) return -1;
     if (a.name > b.name) return 1;
     return 0;
   });
-  return sessionStore.sessionList;
+  return filteredSessionList.value;
 });
 
 const workoutStore = useWorkoutStore();
@@ -114,6 +125,15 @@ async function onTouchEnd(e, id) {
   <div>
     <div class="title">
       <span>fitness</span>
+      <div class="searchFilter">
+        <input v-if="showSearchFilter" v-model="searchFilter" type="search" placeholder="Filter Sessions"/>
+        <span @click.prevent="showSearchFilter = !showSearchFilter" role="button" aria-label="Toggle search">
+          <svg class="icon-search" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+      </div>
     </div>
     <ul class="horizontal-button-list newSession">
       <li
@@ -127,7 +147,7 @@ async function onTouchEnd(e, id) {
       <li
         :key="'manageWorkouts'"
         @click="props.router.push('/workout')"
-        class="button button-action"
+        class="button button-action manageWorkouts"
       >
         Manage Workouts
       </li>
@@ -179,6 +199,18 @@ async function onTouchEnd(e, id) {
 </template>
 
 <style lang="sass" scoped>
+.title
+  position: relative
+
+  .searchFilter
+    position: absolute
+    right: 1rem
+  
+    span
+      position: relative;
+      top: 0.3rem;
+      padding-left: 0.5rem;
+
 @keyframes spin
   from
     transform: rotate(0deg)

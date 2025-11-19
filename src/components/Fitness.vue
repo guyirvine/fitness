@@ -158,7 +158,6 @@ onMounted(() => {
       color: #388e3c
 
     input
-      width: 60%
       padding: 0.3rem
       margin-top: 0.1rem
 
