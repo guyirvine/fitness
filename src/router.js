@@ -5,7 +5,7 @@ import EditSession from './components/EditSession.vue';
 import WorkoutList from './components/WorkoutList.vue';
 import NewWorkout from './components/NewWorkout.vue';
 import EditWorkout from './components/EditWorkout.vue';
-
+import Auth from './components/Auth.vue';
 
 const routes = [
   {
@@ -21,6 +21,11 @@ const routes = [
         name: 'editsession',
         component: EditSession,
         props: true
+      },
+      {
+        path: 'auth',
+        name: 'auth',
+        component: Auth
       },
       {
         path: 'session',
