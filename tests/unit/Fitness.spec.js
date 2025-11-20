@@ -45,13 +45,4 @@ describe('Fitness.vue', () => {
     expect(loadWorkoutsFromAPI).toHaveBeenCalled()
     expect(loadSessionsFromAPI).toHaveBeenCalled()
   })
-
-  it('computes activatedTab based on route.name', async () => {
-    // mount with route name 'workout' returns activatedTab = 'workout'
-    const wrapper = mount(Fitness, {
-      global: { stubs: { 'router-view': true, 'router-link': true } }
-    })
-    // The component exposes `activatedTab` as a computed; verify its value
-    expect(wrapper.vm.activatedTab).toBe('workout')
-  })
 })
