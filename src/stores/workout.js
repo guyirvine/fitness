@@ -10,8 +10,6 @@ export const useWorkoutStore = defineStore('workout', () => {
   const workoutList = ref([])
   const workoutList2 = ref([])
 
-
-//  const app = initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
