@@ -127,12 +127,12 @@ async function onTouchEnd(e, id) {
       <span>fitness</span>
       <div class="searchFilter">
         <input v-if="showSearchFilter" v-model="searchFilter" type="search" placeholder="Filter Sessions"/>
-        <span @click.prevent="showSearchFilter = !showSearchFilter" role="button" aria-label="Toggle search">
+        <a href="" @click.prevent="showSearchFilter = !showSearchFilter" aria-label="Toggle search">
           <svg class="icon-search" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="7"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-        </span>
+        </a>
       </div>
     </div>
     <ul class="horizontal-button-list newSession">
@@ -206,10 +206,11 @@ async function onTouchEnd(e, id) {
     position: absolute
     right: 1rem
   
-    span
+    a
       position: relative;
       top: 0.3rem;
       padding-left: 0.5rem;
+      color: #42b883
 
 @keyframes spin
   from
