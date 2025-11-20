@@ -13,6 +13,7 @@ start_sonar:
 	docker start sonarqube
 
 scan:
+	npm test
 	docker run \
 		--rm \
 		-e SONAR_HOST_URL="${SONAR_HOST_URL}"  \
