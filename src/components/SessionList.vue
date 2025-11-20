@@ -140,7 +140,7 @@ async function onTouchEnd(e, id) {
         v-for="workout in sortedWorkoutList"
         :key="workout.id"
         @click="addSession(workout)"
-        class="button"
+        class="button workout"
       >
         {{ workout.name }}
       </li>
