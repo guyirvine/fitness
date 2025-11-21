@@ -75,7 +75,7 @@ async function handleCancel() {
         <p>
           <label
             >Notes
-            <input v-model="session.notes" placeholder="Notes" type="text" />
+            <textarea v-model="session.notes" placeholder="Notes"></textarea>
           </label>
         </p>
         <p>
