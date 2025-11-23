@@ -14,6 +14,8 @@ const searchFilter = ref("");
 const sessionStore = useSessionStore();
 
 const filteredSessionList = computed(() => {
+  if (!showSearchFilter.value) return sessionStore.sessionList;
+
   const criteria = searchFilter.value.trim().toLowerCase();
   if (criteria === "") return sessionStore.sessionList;
 
