@@ -54,7 +54,11 @@ describe('EditSession.vue', () => {
     // first input is the name field
     expect(inputs[0].element.value).toBe('Morning Session')
     // notes field should contain the notes
-    expect(inputs[1].element.value).toBe('Some notes')
+    expect(inputs[1].element.value).toBe('2025-10-09')
+
+
+    const textAreas = wrapper.findAll('textarea')
+    expect(textAreas[0].element.value).toBe('Some notes')
   })
 
   it('submits updated session and navigates back to /session', async () => {
