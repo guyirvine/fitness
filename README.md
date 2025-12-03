@@ -7,6 +7,7 @@ This is a Vue 3 + Vite app to track your fitness at home.
 - Add, edit, and view details for each workout
 - Track workout sessions
 - Simple, clean UI
+- Data stored locally so no Login required and minimal server usage.
 
 ## Getting Started
 
