@@ -1,11 +1,11 @@
 
 # Fitness: Plan & Track My Fitness
 
-This is a Vue 3 + Vite app to track the lifecycle of your vegetable plants at home.
+This is a Vue 3 + Vite app to track your fitness at home.
 
 ## Features
-- Add, edit, and view details for each plant
-- Track planting date, growth stage, notes, and harvest date
+- Add, edit, and view details for each workout
+- Track workout sessions
 - Simple, clean UI
 
 ## Getting Started
